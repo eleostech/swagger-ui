@@ -1210,7 +1210,7 @@
   cursor: pointer;
 }
 .swagger-section #header {
-  background-color: #89bf04;
+  background-color: #121212;
   padding: 14px;
 }
 .swagger-section #header a#logo {
@@ -1232,10 +1232,20 @@
   float: left;
   margin: 0 10px 0 0;
 }
+
+.swagger-section #header form#api_selector select {
+  display: block;
+  clear: none;
+  float: left;
+   margin: 2px 10px 0 0;
+   padding-top: 3px;
+   padding-bottom: 3px;
+}
+
 .swagger-section #header form#api_selector .input input#input_apiKey {
   width: 200px;
 }
-.swagger-section #header form#api_selector .input input#input_baseUrl {
+.swagger-section #header form#api_selector .input select#input_baseUrl {
   width: 400px;
 }
 .swagger-section #header form#api_selector .input a#explore {
@@ -1245,7 +1255,7 @@
   padding: 6px 8px;
   font-size: 0.9em;
   color: white;
-  background-color: #547f00;
+  background-color: #444444;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
@@ -1254,7 +1264,7 @@
   border-radius: 4px;
 }
 .swagger-section #header form#api_selector .input a#explore:hover {
-  background-color: #547f00;
+  background-color: #444444;
 }
 .swagger-section #header form#api_selector .input input {
   font-size: 0.9em;
