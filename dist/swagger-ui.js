@@ -844,12 +844,13 @@ this["Handlebars"]["templates"]["response_content_type"] = Handlebars.template({
   return buffer + "</select>\n";
 },"useData":true});
 this["Handlebars"]["templates"]["signature"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div>\n<ul class=\"signature-nav\">\n  <li><a class=\"description-link\" href=\"#\">Model</a></li>\n  <li><a class=\"snippet-link\" href=\"#\">Model Schema</a></li>\n</ul>\n<div>\n\n<div class=\"signature-container\">\n  <div class=\"description\">\n    ";
+  var stack1, stack2, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div>\n<ul class=\"signature-nav\">\n  <li><a class=\"description-link\" href=\"#\">Model</a></li>\n  <li><a class=\"snippet-link\" href=\"#\">Model Sample</a></li>\n<li><a class=\"json-schema-link\" href=\"#\">JSON Schema</a></li>\n </ul>\n<div>\n\n<div class=\"signature-container\">\n  <div class=\"description\">\n    ";
   stack1 = ((helper = (helper = helpers.signature || (depth0 != null ? depth0.signature : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"signature","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
+  stack2 = ((helper = (helper = helpers.jsonSchemaUrl || (depth0 != null ? depth0.jsonSchemaUrl : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"jsonSchemaUrl","hash":{},"data":data}) : helper));
   return buffer + "\n  </div>\n\n  <div class=\"snippet\">\n    <pre><code>"
     + escapeExpression(((helper = (helper = helpers.sampleJSON || (depth0 != null ? depth0.sampleJSON : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleJSON","hash":{},"data":data}) : helper)))
-    + "</code></pre>\n    <small class=\"notice\"></small>\n  </div>\n</div>\n\n";
+    + "</code></pre>\n    <small class=\"notice\"></small>\n  </div>\n<div class=\"json-schema\">\n <a href=\"" + stack2 + "\">View JSON Schema</a></div></div>\n\n";
 },"useData":true});
 this["Handlebars"]["templates"]["status_code"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var lambda=this.lambda, escapeExpression=this.escapeExpression;
@@ -883,6 +884,7 @@ this["Handlebars"]["templates"]["status_code"] = Handlebars.template({"1":functi
 var auth = require('./lib/auth');
 var helpers = require('./lib/helpers');
 var SwaggerClient = require('./lib/client');
+var http = require('./lib/http');
 var deprecationWrapper = function (url, options) {
   helpers.log('This is deprecated, use "new SwaggerClient" instead.');
 
@@ -918,10 +920,11 @@ module.exports = SwaggerClient;
 SwaggerClient.ApiKeyAuthorization = auth.ApiKeyAuthorization;
 SwaggerClient.PasswordAuthorization = auth.PasswordAuthorization;
 SwaggerClient.CookieAuthorization = auth.CookieAuthorization;
+SwaggerClient.Http = http;
 SwaggerClient.SwaggerApi = deprecationWrapper;
 SwaggerClient.SwaggerClient = deprecationWrapper;
 
-},{"./lib/auth":2,"./lib/client":3,"./lib/helpers":4}],2:[function(require,module,exports){
+},{"./lib/auth":2,"./lib/client":3,"./lib/helpers":4,"./lib/http":5}],2:[function(require,module,exports){
 'use strict';
 
 var btoa = require('btoa'); // jshint ignore:line
@@ -31310,7 +31313,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
           signatureModel = {
             sampleJSON: JSON.stringify(value.createJSONSample(), void 0, 2),
             isParam: false,
-            signature: value.getMockSignature()
+            signature: value.getMockSignature(),
+            jsonSchemaUrl: this.model.operation['x-json-schema-url']
           };
         }
       }
@@ -31318,7 +31322,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       signatureModel = {
         sampleJSON: this.model.responseSampleJSON,
         isParam: false,
-        signature: this.model.responseClassSignature
+        signature: this.model.responseClassSignature,
+        jsonSchemaUrl: this.model.operation['x-json-schema-url']
       };
     }
     var opts = this.options.swaggerOptions;
@@ -32070,6 +32075,7 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
   events: {
     'click a.description-link'       : 'switchToDescription',
     'click a.snippet-link'           : 'switchToSnippet',
+    'click a.json-schema-link'       : 'switchToJsonSchema',
     'mousedown .snippet'          : 'snippetToTextArea'
   },
 
@@ -32084,6 +32090,7 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
     this.switchToSnippet();
 
     this.isParam = this.model.isParam;
+    this.jsonSchemaUrl = this.model.jsonSchemaUrl;
 
     if (this.isParam) {
       $('.notice', $(this.el)).text('Click to set as parameter value');
@@ -32098,8 +32105,10 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
 
     $('.snippet', $(this.el)).hide();
     $('.description', $(this.el)).show();
+    $('.json-schema', $(this.el)).hide();
     $('.description-link', $(this.el)).addClass('selected');
     $('.snippet-link', $(this.el)).removeClass('selected');
+    $('.json-schema-link', $(this.el)).removeClass('selected');
   },
 
   // handler for show sample
@@ -32107,9 +32116,38 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
     if (e) { e.preventDefault(); }
 
     $('.description', $(this.el)).hide();
+    $('.json-schema', $(this.el)).hide();
     $('.snippet', $(this.el)).show();
     $('.snippet-link', $(this.el)).addClass('selected');
     $('.description-link', $(this.el)).removeClass('selected');
+    $('.json-schema-link', $(this.el)).removeClass('selected');
+  },
+
+  switchToJsonSchema: function(e){
+    if (e) { e.preventDefault(); }
+
+    $('.description', $(this.el)).hide();
+    $('.snippet', $(this.el)).hide();
+    $('.json-schema', $(this.el)).show();
+    $('.json-schema-link', $(this.el)).addClass('selected');
+    $('.description-link', $(this.el)).removeClass('selected');
+    $('.snippet-link', $(this.el)).removeClass('selected');
+
+    var obj = {
+      url: this.jsonSchemaUrl,
+      method: 'GET',
+      headers: {accept: 'application/json'},
+      on: {
+        response: function (response) {
+          $('.json-schema').html('<pre class="json"><code>' + response.data + '</code></pre>');
+        },
+        error: function (response) {
+          console.log(response);
+        }
+      }
+    };
+
+    new SwaggerClient.Http().execute(obj);
   },
 
   // handler for snippet to text area
