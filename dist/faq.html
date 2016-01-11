@@ -1,13 +1,7 @@
 <html>
   <head>
-  <SCRIPT LANGUAGE="JavaScript">
-  <!-- 
-  function showFAQ(form) {
-    form.answer.value = form.question.options[form.question.selectedIndex].value;
-  }
-  // -->
-
-  </SCRIPT>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src=./faq.js></script>
   </head>
 
   <body>
@@ -15,25 +9,20 @@
       <img src="http://eleostech.com/assets/img/eleos-linkedin.jpg" alt="" style="float:left;padding-top:20px">
       <h1 style="padding-top:40px">Eleos API Integration FAQ</h1>
     </div>
-    <br />
+    <br /> <br /> <br />
 
-    <form name="faqform">
-      <table border="1" cellspacing="0" cellpadding="5" style="width:70%">
-      <tr bgcolor="#C0C0C0">  
-        <td align=center><font face="Arial" size="-1" color="#ffffff">
-        <b>Frequently Asked Questions</b></font></td>
-      </tr>
+   <div role="application">
+   <form>
+     <div id="accordian1" class="tabpanel" role="tablist" multiselectable="true">
 
-      <tr bgcolor="#F6E3CE">
-        <td>
-        <br>
-        Click a question to view the answer:
-        <ul>
-
-        <select size="15" name="question" onChange="javascript:showFAQ(this.form);" style="width:95%">
 <!-- QUESTION 1 -->
-        <option value="
-To enable scanning confirm you have defined an `action` type as `scan-flow` and the `metadata_form_code` is set appropriately for the form you wish to employ.  
+     <h3 id="tab1" class="tab accordian selected" aria-selected="true" aria-controls="panel1" aria-expanded="true" role="tab" tabindex="0">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/expanded.gif" alt="expanded" />
+       Why do I see 'Feature not enabled' when attempting to launch a scan flow?
+     </h3>
+
+     <div id="panel1" class="panel accordian" aria-labelledby="tab1" aria-hidden="false" role="tabpanel">
+       <pre>To enable scanning confirm you have defined an `action` type as `scan-flow` and the `metadata_form_code` is set appropriately for the form you wish to employ.
 
 For instance:
 'actions': [{
@@ -49,13 +38,18 @@ For instance:
 where 'DOCUMENT-METADATA' is the value of the form `code` you are applying to this flow.
 
 Note, this example assumes the `DOCUMENT-METADATA` form has been defined for your integration. If you are not sure if one has been populated for your integration, consult with your Eleos Integration point of contact.
-">
-        &nbsp;&nbsp;&nbsp;1. &nbsp;&nbsp;
-Why do I see 'Feature not enabled' when attempting to launch a scan flow?
+       </pre>
+    </div>
+<!-- END QUESTION 1 -->
 
 <!-- QUESTION 2 -->
-        <option value="
-To fill form fields, use a `data` object within the `properties` of the `action` types `send-transaction` or `transaction-editor` as follows:
+     <h3 id="tab2" class="tab accordian selected" aria-selected="false" aria-controls="panel2" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+       How do I automatically fill fields of a form in preparation for the driver sending it?
+     </h3>
+
+     <div id="panel2" class="panel accordian" aria-labelledby="tab2" aria-hidden="true" role="tabpanel">
+       <pre>To fill form fields, use a `data` object within the `properties` of the `action` types `send-transaction` or `transaction-editor` as follows:
 
         'properties': {
             'data' : {
@@ -66,13 +60,18 @@ To fill form fields, use a `data` object within the `properties` of the `action`
         }
 
 Note, if you are not sure how to identify 'field codes' for a given form, consult with your Eleos Integration point of contact.
-">
-        &nbsp;&nbsp;&nbsp;2. &nbsp;&nbsp;
-How do I automatically fill fields of a form in preparation for the driver sending it?
+       </pre>
+    </div>
+<!-- END QUESTION 2 -->
 
 <!-- QUESTION 3 -->
-        <option value="
-Option 1: Action, Transaction Editor, presents a 'Compose' message to the driver displaying the form identified by 'form_code'. The driver may be able to edit and change field values before hitting 'Send':
+     <h3 id="tab3" class="tab accordian selected" aria-selected="false" aria-controls="panel3" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+      Is it possible to put 'Accept' / 'Reject' buttons on my Load list?
+     </h3>
+
+     <div id="panel3" class="panel accordian" aria-labelledby="tab3" aria-hidden="true" role="tabpanel">
+       <pre>Option 1: Action, Transaction Editor, presents a 'Compose' message to the driver displaying the form identified by 'form_code'. The driver may be able to edit and change field values before hitting 'Send':
 
       'actions' : [
         {
@@ -111,13 +110,18 @@ Option 2: Action, Send Transaction, presents the driver with simply a pop-up sho
         }
 
 Note, if you are not sure what 'form_code' values or 'form fields' are available for your integration, consult with your Eleos Integration point of contact.
-">
-        &nbsp;&nbsp;&nbsp;3. &nbsp;&nbsp;
-Is it possible to put 'Accept' / 'Reject' buttons on my Load list?
+       </pre>
+    </div>
+<!-- END QUESTION 3 -->
 
 <!-- QUESTION 4 -->
-        <option value="
-Define a Stop action using the type `transaction-editor` and specifying a `form-code` value of `BAD-ADDRESS`; further, prefill the `LOAD-NUMBER` and `STOP` fields of the `BAD-ADDRESS` form appropriately.
+     <h3 id="tab4" class="tab accordian selected" aria-selected="false" aria-controls="panel4" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+      The address of a Stop is invalid, how do I report a Bad Address?
+     </h3>
+
+     <div id="panel4" class="panel accordian" aria-labelledby="tab4" aria-hidden="true" role="tabpanel">
+       <pre>Define a Stop action using the type `transaction-editor` and specifying a `form-code` value of `BAD-ADDRESS`; further, prefill the `LOAD-NUMBER` and `STOP` fields of the `BAD-ADDRESS` form appropriately.
 
 For example:
 
@@ -136,23 +140,36 @@ For example:
         },
 
 Note, this example assumes the `BAD-ADDRESS` form is defined for your environment. If you are not sure if one has been populated for your integration, consult with your Eleos Integration point of contact.
-">
-        &nbsp;&nbsp;&nbsp;4. &nbsp;&nbsp;
-The address of a Stop is invalid, how do I report a Bad Address?
-        </select>
-        </ul>
+       </pre>
+    </div>
+<!-- END QUESTION 4 -->
+</form>
 
-        <p>
-          Answer:
-        </p>
-        <ul>
-          <textarea name="answer" rows=20 wrap="virtual" style="width:95%"></textarea>
-        </ul>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        var panel1 = new tabpanel("accordian1", true);
+    });
 
-        </td>
-        </tr>
-      </table>
-    </form>
+    $.extend($.expr[':'], {
+        focusable: function(element) {
+            var nodeName = element.nodeName.toLowerCase();
+            var tabIndex = $(element).attr('tabindex');
+            if (($(element)[(nodeName == 'area' ? 'parents' : 'closest')](':hidden').length) == true) {
+                return false;
+            }
+            if (!isNaN(tabIndex) && tabIndex < 0) {
+                return false;
+            }
+            if (/input|select|textarea|button|object/.test(nodeName) == true) {
+                return !element.disabled;
+            }
+            if ((nodeName == 'a' ||  nodeName == 'area') == true) {
+                return (element.href.length > 0);
+            }
+            return false;
+        }
+    });
+  </script>
   </body>
 </html>
 

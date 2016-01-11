@@ -1301,3 +1301,71 @@
   text-align: center;
   padding-top: 10px;
 }
+
+/* Start FAQ CSS */
+.tabpanel {
+  margin: 20px;
+  padding: 0;
+}
+.tablist {
+  margin: 0 0px;
+  padding: 0;
+  list-style: none;
+}
+.tab {
+  margin: .2em 1px 0 0;
+  padding: 10px;
+  height: 1em;
+  font-weight: bold;
+  background-color: #ec9;
+
+  border: 1px solid black;
+  -webkit-border-radius-topright: 5px;
+  -webkit-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-radius-topright: 5px;
+  border-radius-topleft: 5px;
+
+  float: left;
+}
+.panel {
+  clear: both;
+  margin: 0 0 0 0;
+  padding: 10px;
+  width: 600px;
+  border: 1px solid black;
+
+  -webkit-border-radius-topright: 10px;
+  -webkit-border-radius-bottomleft: 10px;
+  -webkit-border-radius-bottomright: 10px;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-radius-topright: 10px;
+  border-radius-bottomleft: 10px;
+  border-radius-bottomright: 10px; 
+} 
+h3.selected {
+  background-color: #fc5;
+}
+.focus {
+  color: black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: #fff !important;
+  margin-top: 0;
+}
+.accordian {
+  margin: 0;
+  float: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  width: 600px;
+}
+.hidden {
+  position: absolute;
+  left: -300em;
+  top: -30em;
+}
