@@ -1228,6 +1228,13 @@
   padding: 20px 0 20px 40px;
   color: white;
 }
+.swagger-section #header a#faq-view {
+  font-size: 1.5em;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px 0 20px 40px;
+  color: white;
+}
 .swagger-section #header form#api_selector {
   display: block;
   clear: none;
