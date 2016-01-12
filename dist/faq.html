@@ -22,7 +22,8 @@
      </h3>
 
      <div id="panel1" class="panel accordian" aria-labelledby="tab1" aria-hidden="false" role="tabpanel">
-       <pre>To enable scanning confirm you have defined an `action` type as `scan-flow` and the `metadata_form_code` is set appropriately for the form you wish to employ.
+       <pre>To enable scanning confirm you have defined an `action` type as `scan-flow` and the `metadata_form_code` 
+is set appropriately for the form you wish to employ.
 
 For instance:
 'actions': [{
@@ -35,9 +36,12 @@ For instance:
                              'scan_type': 'form-specified'
               }
     }],
+
 where 'DOCUMENT-METADATA' is the value of the form `code` you are applying to this flow.
 
-Note, this example assumes the `DOCUMENT-METADATA` form has been defined for your integration. If you are not sure if one has been populated for your integration, consult with your Eleos Integration point of contact.
+Note, this example assumes the `DOCUMENT-METADATA` form has been defined for your integration. 
+If you are not sure if one has been populated for your integration, consult with your Eleos Integration 
+point of contact.
        </pre>
     </div>
 <!-- END QUESTION 1 -->
@@ -49,7 +53,8 @@ Note, this example assumes the `DOCUMENT-METADATA` form has been defined for you
      </h3>
 
      <div id="panel2" class="panel accordian" aria-labelledby="tab2" aria-hidden="true" role="tabpanel">
-       <pre>To fill form fields, use a `data` object within the `properties` of the `action` types `send-transaction` or `transaction-editor` as follows:
+       <pre>To fill form fields, use a `data` object within the `properties` of the `action` types 
+`send-transaction` or `transaction-editor` as follows:
 
         'properties': {
             'data' : {
@@ -59,7 +64,8 @@ Note, this example assumes the `DOCUMENT-METADATA` form has been defined for you
             }
         }
 
-Note, if you are not sure how to identify 'field codes' for a given form, consult with your Eleos Integration point of contact.
+Note, if you are not sure how to identify 'field codes' for a given form, consult with 
+your Eleos Integration point of contact.
        </pre>
     </div>
 <!-- END QUESTION 2 -->
@@ -71,7 +77,11 @@ Note, if you are not sure how to identify 'field codes' for a given form, consul
      </h3>
 
      <div id="panel3" class="panel accordian" aria-labelledby="tab3" aria-hidden="true" role="tabpanel">
-       <pre>Option 1: Action, Transaction Editor, presents a 'Compose' message to the driver displaying the form identified by 'form_code'. The driver may be able to edit and change field values before hitting 'Send':
+       <pre>Option 1: Action, Transaction Editor, presents a 'Compose' message to the driver 
+displaying the form identified by 'form_code'.  The driver may be able to edit and change field 
+values before hitting 'Send'.
+
+Example:
 
       'actions' : [
         {
@@ -88,7 +98,9 @@ Note, if you are not sure how to identify 'field codes' for a given form, consul
           'button_color': '#ff3b30'
         },
 
-Option 2: Action, Send Transaction, presents the driver with simply a pop-up showing the 'text-to-display-in-prompt' with buttons labeled with the 'yes/no-button-label' strings and the driver simply answer the prompt with the 'yes/no' selection to determine if the form is sent (yes response) or not.
+Option 2: Action, Send Transaction, presents the driver with simply a pop-up showing the 'text-to-display-in-prompt' 
+with buttons labeled with the 'yes/no-button-label' strings and the driver simply answer the prompt with the 'yes/no' 
+selection to determine if the form is sent (yes response) or not.
 
       'actions' : [
         {
@@ -109,7 +121,8 @@ Option 2: Action, Send Transaction, presents the driver with simply a pop-up sho
           'button_color' : '#ff3b30'
         }
 
-Note, if you are not sure what 'form_code' values or 'form fields' are available for your integration, consult with your Eleos Integration point of contact.
+Note, if you are not sure what 'form_code' values or 'form fields' are available for your 
+integration, consult with your Eleos Integration point of contact.
        </pre>
     </div>
 <!-- END QUESTION 3 -->
@@ -121,7 +134,8 @@ Note, if you are not sure what 'form_code' values or 'form fields' are available
      </h3>
 
      <div id="panel4" class="panel accordian" aria-labelledby="tab4" aria-hidden="true" role="tabpanel">
-       <pre>Define a Stop action using the type `transaction-editor` and specifying a `form-code` value of `BAD-ADDRESS`; further, prefill the `LOAD-NUMBER` and `STOP` fields of the `BAD-ADDRESS` form appropriately.
+       <pre>Define a Stop action using the type `transaction-editor` and specifying a `form-code` value of `BAD-ADDRESS`; 
+further, prefill the `LOAD-NUMBER` and `STOP` fields of the `BAD-ADDRESS` form appropriately.
 
 For example:
 
@@ -139,10 +153,155 @@ For example:
           'button_color': '#ff3b30'
         },
 
-Note, this example assumes the `BAD-ADDRESS` form is defined for your environment. If you are not sure if one has been populated for your integration, consult with your Eleos Integration point of contact.
+Note, this example assumes the `BAD-ADDRESS` form is defined for your environment. 
+
+If you are not sure if one has been populated for your integration, consult with your 
+Eleos Integration point of contact.
        </pre>
     </div>
 <!-- END QUESTION 4 -->
+
+<!-- QUESTION 5 -->
+     <h3 id="tab5" class="tab accordian selected" aria-selected="false" aria-controls="panel5" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     When I bring up the loads page only one load appears. Is there any way to display the pre-planned and dispatched loads on this page?
+     </h3>
+
+     <div id="panel5" class="panel accordian" aria-labelledby="tab5" aria-hidden="true" role="tabpanel">
+       <pre>The Loads page is driven largely by the { active: true } versus { active : false } attribute 
+of the Load details. 
+
+You may send as many Loads as you like, `pre-planned` or `dispatched,` and the active flag 
+will determine whether the load appears in the Loads section ('active' is true) or the 
+history section ('active' is false).
+       </pre>
+    </div>
+<!-- END QUESTION 5 -->
+
+<!-- QUESTION 6 -->
+     <h3 id="tab6" class="tab accordian selected" aria-selected="false" aria-controls="panel6" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     How do I configure my Firewall or Load Balancer when exposing my Web Services?
+     </h3>
+
+     <div id="panel6" class="panel accordian" aria-labelledby="tab6" aria-hidden="true" role="tabpanel">
+       <pre>Requests from the Eleos Mobile Platform cloud can and may come from anywhere on the 
+public internet due to the HA nature of our environment. 
+
+Therefore, our recommendation is for you to reject any request that does not include 
+the expected `Eleos-Platform-Key`, which is a check that is normally performed at the
+Load Balancer level but could also be done within the web services as well.
+
+Visit the `API Settings` on the Dashboard for your development or production environment 
+to note or establish the specific endpoint URLs for the services you are exposing as well 
+as assigning the value of the `Eleos-Platform-Key`.
+       </pre>
+    </div>
+<!-- END QUESTION 6 -->
+
+<!-- QUESTION 7 -->
+     <h3 id="tab7" class="tab accordian selected" aria-selected="false" aria-controls="panel7" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     I noticed some of the loads show yellow on the left side. What capabilities do I currently have for adjusting the color of a Stop list item?  
+     </h3>
+
+     <div id="panel7" class="panel accordian" aria-labelledby="tab7" aria-hidden="true" role="tabpanel">
+       <pre>A load with `"current": true`  will display a yellow bar.  Presently, there is no 
+external control over the color.
+       </pre>
+    </div>
+<!-- END QUESTION 7 -->
+
+<!-- QUESTION 8 -->
+     <h3 id="tab8" class="tab accordian selected" aria-selected="false" aria-controls="panel8" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     When I looked at the file sent for a `Photograph` Scan Mode from my scan-flow, it was a Black&White TIF image.
+     </h3>
+
+     <div id="panel8" class="panel accordian" aria-labelledby="tab8" aria-hidden="true" role="tabpanel">
+       <pre>Presently, our TIF files do not support color; however, it is possible to change the 
+default to JPEG if you are able to process this format. 
+
+Simply consult with your Eleos Integration point of contact.
+       </pre>
+    </div>
+<!-- END QUESTION 8 -->
+
+<!-- QUESTION 9-->
+     <h3 id="tab9" class="tab accordian selected" aria-selected="false" aria-controls="panel9" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     The Home screen of my mobile application shows only white.  What do I do?
+     </h3>
+
+     <div id="panel9" class="panel accordian" aria-labelledby="tab9" aria-hidden="true" role="tabpanel">
+       <pre>The 'dashboard' is responsible for populating the home screen of the application, an 
+example is found below.
+
+This must be included in the Authentication response along with the "menu" : {"menu_items" : [. . . .]}} 
+to populate the navigation sidebar (hamburger menu).
+
+     "dashboard": {
+       "dashboard_items": [
+         {
+           "type": "news",
+           "header": "News",
+           "icon_ref": "dashboard_news"
+         },
+         {
+           "type": "loads",
+           "header": "Loads",
+           "icon_ref": "dashboard_loads",
+           "properties": {
+             "status_summaries": [
+               {
+                 "label": "Pre-plan",
+                 "code": "PRE-PLAN"
+               },
+               {
+                 "label": "Paid",
+                 "code": "EMPTY"
+               }
+             ]
+           }
+         }
+      ]
+     },
+
+Note - a white screen may be indicative a syntax error in the JSON you are rendering. 
+Be sure to monitor the Eleos Mobile Platform cloud `Error Console` for your environment. 
+Not sure where to find your `Error Console`, ask your Eleos Integration point of contact.
+       </pre>
+    </div>
+<!-- END QUESTION 9 -->
+
+<!-- QUESTION 10 -->
+     <h3 id="tab10" class="tab accordian selected" aria-selected="false" aria-controls="panel10" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+     JSON schema validation errors appear in the `Error Console` for fields I am not setting.
+     </h3>
+
+     <div id="panel10" class="panel accordian" aria-labelledby="tab10" aria-hidden="true" role="tabpanel">
+       <pre>Ensure you configure your JSON serializer to 'Ignore Null' so that 'null' values are 
+omitted from the payloads returned by your web services.
+
+If you are using Newton - here is how you configure 'Ignore' for NullValueHandlling:
+
+  string json = 
+   JsonConvert.SerializeObject(data, 
+                Formatting.Indented, 
+                new JsonSerializerSettings { 
+                     NullValueHandling = NullValueHandling.Ignore 
+                });
+
+As a result, values such as the following will NOT be serialized:
+    props.form_code = null;
+
+However, sadly, empty values such as the following WILL be outputted (so avoid making 
+explicit empty string assignment):
+    props.form_code = "";
+       </pre>
+    </div>
+<!-- END QUESTION 10 -->
 </form>
 
   <script type="text/javascript">
