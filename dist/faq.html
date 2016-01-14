@@ -302,6 +302,47 @@ explicit empty string assignment):
        </pre>
     </div>
 <!-- END QUESTION 10 -->
+
+<!-- QUESTION 11 -->
+     <h3 id="tab11" class="tab accordian selected" aria-selected="false" aria-controls="panel11" aria-expanded="false" role="tab" tabindex="-1">
+         <img src="http://www.oaa-accessibility.org/media/examples/images/contracted.gif" alt="collapsed" />
+      How do I get the totals to show in the load summary on the home page (i.e. Pre-Plan and Paid)?
+     </h3>
+
+     <div id="panel11" class="panel accordian" aria-labelledby="tab11" aria-hidden="true" role="tabpanel">
+       <pre>Consider this `dashboard` example:
+    "dashboard": {
+      "dashboard_items": [
+        {
+          "type": "loads",
+          "header": "Loads",
+          "icon_ref": "dashboard_loads",
+          "properties": {
+            "status_summaries": [
+              {
+                "label": "Pre-plan",
+                "code": "PRE-PLAN"
+              },
+              {
+                "label": "Paid",
+                "code": "EMPTY"
+              }
+            ]
+          }
+        },
+
+Totals are computed as: 
+  Loads with a `load_status` that matches the `code`
+
+See: 
+   "load_status": "PRE-PLAN" 
+or
+   "load_status": "EMPTY" 
+in your Loads JSON
+
+       </pre>
+    </div>
+<!-- END QUESTION 11 -->
 </form>
 
   <script type="text/javascript">
