@@ -1369,3 +1369,7 @@ h3.selected {
   left: -300em;
   top: -30em;
 }
+
+p img {
+    width: 100%;
+}
